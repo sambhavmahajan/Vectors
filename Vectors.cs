@@ -7,7 +7,6 @@ namespace Vector
 {
     public class Vector
     {
-        public enum Operator { additon, substraction, multiplication, division };
         public int x;
         public int y;
         public Vector(int _x,int _y)
@@ -114,17 +113,41 @@ namespace Vector
         }
         public static class Matrix2D
         {
-            public static float[][] Add(float[][] m1,float[][] m2)
+            /// <summary>
+            /// Add two matrices
+            /// </summary>
+            /// <param name="m1"></param>
+            /// <param name="m2"></param>
+            /// <returns></returns>
+            public static float[,] Add(float[,] m1,float[,] m2)
             {
-                return 0f;
+                if (m1.GetLength(0) != m2.GetLength(0) || m1.GetLength(1) != m2.GetLength(1))
+                {
+                    throw new System.ArgumentException("Can not add matrices of different sizes");
+                }
+                float[,] mr = new float[m1.GetLength(0),m1.GetLength(2)];
+                for (int i1 = 0; i1 < mr.GetLength(0); i1++)
+                {
+                    for (int i2 = 0; i2 < mr.GetLength(1); i1++)
+                    {
+                        mr[i1, i2] = m1[i1, i2] + m2[i1, i2];
+                    }
+                }
+                return mr;
             }
-            public static float[][] ScalarMultiplication(float scalar, float[][] matrix)
+            /// <summary>
+            /// Multiplies all elements of matrcies with a constant scalar
+            /// </summary>
+            /// <param name="scalar"></param>
+            /// <param name="matrix"></param>
+            /// <returns></returns>
+            public static float[,] ScalarMultiplication(float scalar, float[,] matrix)
             {
                 for (int i1 = 0; i1 < matrix.GetLength(0); i1++)
                 {
                     for (int i2 = 0; i2 < matrix.GetLength(1); i2++)
                     {
-                        matrix[i1][i2] *= 2;
+                        matrix[i1,i2] *= scalar;
                     }
                 }
                 return matrix;
