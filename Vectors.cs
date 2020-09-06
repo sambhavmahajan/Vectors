@@ -111,7 +111,7 @@ namespace Vector
         {
             return (value / (1 + Abolute(value)));
         }
-        public static class Matrix2D
+        public static class Matrix
         {
             /// <summary>
             /// Add two matrices
