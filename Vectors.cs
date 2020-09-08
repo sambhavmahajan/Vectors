@@ -152,6 +152,31 @@ namespace Vector
                 }
                 return matrix;
             }
+            /// <summary>
+            /// Multiplies two matrices
+            /// </summary>
+            /// <param name="m1"></param>
+            /// <param name="m2"></param>
+            /// <returns></returns>
+            public static float[,] Multiply(float[,] m1, float[,] m2)
+            {
+                if(m1.GetLength(1)!=m2.GetLength(0))
+                {
+                    throw new System.ArgumentException("Can not multiply matrices");
+                }
+                float[,] m3 = new float[m1.GetLength(0),m2.GetLength(1)];
+                for (int i = 0; i < m3.GetLength(1); i++)
+                {
+                    for (int j = 0; j < m3.GetLength(0); j++)
+                    {
+                        for(int k = 0; k<m1.GetLength(1);k++)
+                        {
+                            m3[i, j] += m1[i, k] * m2[k, j];
+                        }
+                    }
+                }
+                return m3;
+            }
         }
     }
 }
